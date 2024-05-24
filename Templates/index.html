@@ -7,6 +7,37 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Ribbit</h1>
+    
+
+    <header>
+        <nav>
+            <div class="navbarContent">
+            <h1>Ribbit</h1>
+            <a href="#">Home</a>
+            <div class="dropdown">
+                <button button onclick="dropFunction()" class="dropbtn">r/</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#">r/1</a>
+                    <a href="#">r/2</a>
+                    <a href="#">r/3</a>
+                </div>
+            </div>
+            <a href="#">Make Post</a>
+            <a href="#">Profile</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="content">
+        <div class="post">
+            <div class="post-design">
+            <h2>My post</h2>
+            <p> I actually dont know wtf to do here this is just testing out design</p>
+                </div>
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
 </body>
 </html>
