@@ -7,24 +7,17 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Configure the SQLAlchemy part of the app instance
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/dbname'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/cloud'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Create the SQLAlchemy db instance
 db = SQLAlchemy(app)
 
-# Redis Labs configuration
-REDIS_HOST = 'your-redis-host'
-REDIS_PORT = 'your-redis-port'
-REDIS_PASSWORD = 'your-redis-password'
-
 # Initialize Redis
-redis_client = redis.StrictRedis(
-    host=REDIS_HOST,
-    port=REDIS_PORT,
-    password=REDIS_PASSWORD,
-    decode_responses=True
-)
+redis_host = 'redis-19735.c327.europe-west1-2.gce.redns.redis-cloud.com'  # Replace with your Redis host from Redis Labs
+redis_port = 19735  # Replace with your Redis port from Redis Labs
+redis_password = 'kJchBWfmn3lc319JRFjWxGGMrX6ef6ib'  # Replace with your Redis password
+redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, db=0)
 
 # Define models
 class User(db.Model):
@@ -45,6 +38,25 @@ class Post(db.Model):
 @app.route('/')
 def index():
     return "Hello, World!"
+
+@app.route('/test_db')
+def test_db():
+    try:
+        # Attempt to query the User table
+        user_count = User.query.count()
+        return jsonify({"message": f"Database connected successfully. User count: {user_count}"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/test_redis')
+def test_redis():
+    try:
+        # Attempt to set and get a value in Redis
+        redis_client.set('test', 'Redis is connected')
+        value = redis_client.get('test').decode('utf-8')
+        return jsonify({"message": f"{value}"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Additional routes and functionalities go here
 
