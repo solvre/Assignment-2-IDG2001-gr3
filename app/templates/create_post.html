@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reddit Clone</title>
+    <title>Create Post</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Welcome to Reddit Clone</h1>
+        <h1>Create a New Post</h1>
     </header>
     <nav>
         <ul>
@@ -19,20 +19,13 @@
         </ul>
     </nav>
     <main>
-        <h2>Latest Posts</h2>
-        <div id="posts">
-            {% for post in posts %}
-                <div class="post">
-                    <h3>{{ post.category }}</h3>
-                    <p>{{ post.text }}</p>
-                    <p><small>Posted by User ID: {{ post.user_id }} on {{ post.date }}</small></p>
-                    <p>Likes: {{ post.likes }}</p>
-                </div>
-            {% endfor %}
-        </div>
+        <form action="{{ url_for('posts.create_post') }}" method="POST">
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" required><br>
+            <label for="text">Text:</label>
+            <textarea id="text" name="text" required></textarea><br>
+            <button type="submit">Create Post</button>
+        </form>
     </main>
-    <footer>
-        <p>&copy; 2024 Reddit Clone</p>
-    </footer>
 </body>
 </html>
