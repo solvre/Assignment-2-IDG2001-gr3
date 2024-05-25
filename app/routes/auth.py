@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template
+from flask import Blueprint, request, jsonify, render_template, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User
 from app import db, redis_client
@@ -34,6 +34,7 @@ def login():
         if user and check_password_hash(user.password, password):
             session_token = os.urandom(24).hex()
             redis_client.set(session_token, user.id)
+            session['session_token'] = session_token
             return jsonify({"message": "Login successful", "session_token": session_token}), 200
         return jsonify({"error": "Invalid credentials"}), 401
     return render_template('login.html')
