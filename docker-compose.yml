@@ -9,7 +9,7 @@ services:
       - db
       - redis
     environment:
-      DATABASE_URL: "mysql://user:password@db/dbname"
+      DATABASE_URL: "mysql+pymysql://user:password@db/dbname"
       REDIS_URL: "redis://redis:6379/0"
 
   db:
