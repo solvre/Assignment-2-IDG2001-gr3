@@ -1,0 +1,1 @@
+ssh -i newkey.ssh ubuntu@129.114.27.31
