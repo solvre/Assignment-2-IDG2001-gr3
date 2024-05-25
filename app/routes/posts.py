@@ -2,20 +2,25 @@ from flask import Blueprint, request, jsonify, render_template, session, redirec
 from app.models import Post
 from app import db, redis_client
 from datetime import datetime
-from app.utils.decorators import login_required
 
 posts_bp = Blueprint('posts', __name__)
 
 # Route to render the home page with the latest posts
 @posts_bp.route('/')
 def index():
-    posts = Post.query.order_by(Post.date.desc()).limit(10).all()
-    return render_template('index.html', posts=posts)
+    category = request.args.get('category', None)
+    if category:
+        posts = Post.query.filter_by(category=category).order_by(Post.date.desc()).limit(10).all()
+    else:
+        posts = Post.query.order_by(Post.date.desc()).limit(10).all()
+    return render_template('index.html', posts=posts, selected_category=category)
 
 # Route to create a new post
 @posts_bp.route('/create_post', methods=['GET', 'POST'])
-@login_required
 def create_post():
+    if 'session_token' not in session or not session['session_token']:
+        return redirect(url_for('auth.login', next=request.url))
+
     if request.method == 'POST':
         session_token = session.get('session_token')
         user_id = redis_client.get(session_token)

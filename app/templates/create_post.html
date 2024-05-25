@@ -10,7 +10,11 @@
     {% endif %}
     <form action="{{ url_for('posts.create_post') }}" method="POST">
         <label for="category">Category:</label>
-        <input type="text" id="category" name="category" required><br>
+        <select id="category" name="category" required>
+            <option value="cats">Cats</option>
+            <option value="science">Science</option>
+            <!-- Add more categories as needed -->
+        </select><br>
         <label for="text">Text:</label>
         <textarea id="text" name="text" required></textarea><br>
         <button type="submit">Create Post</button>

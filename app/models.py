@@ -1,5 +1,7 @@
-from . import db
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
+db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,3 +17,4 @@ class Post(db.Model):
     text = db.Column(db.Text, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
     likes = db.Column(db.Integer, default=0)
+    user = db.relationship('User', backref=db.backref('posts', lazy=True))
