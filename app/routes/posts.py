@@ -8,10 +8,9 @@ posts_bp = Blueprint('posts', __name__)
 
 # Route to render the home page with the latest posts
 @posts_bp.route('/')
-@login_required
 def index():
     posts = Post.query.order_by(Post.date.desc()).limit(10).all()
-    return render_template('base.html', posts=posts)
+    return render_template('index.html', posts=posts)
 
 # Route to create a new post
 @posts_bp.route('/create_post', methods=['GET', 'POST'])

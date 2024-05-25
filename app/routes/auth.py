@@ -36,8 +36,7 @@ def login():
             session_token = os.urandom(24).hex()
             redis_client.set(session_token, user.id)
             session['session_token'] = session_token
-            success_message = "Login successful"
-            return render_template('login.html', success_message=success_message)
+            return redirect(url_for('posts.index'))
         return jsonify({"error": "Invalid credentials"}), 401
     return render_template('login.html')
 
