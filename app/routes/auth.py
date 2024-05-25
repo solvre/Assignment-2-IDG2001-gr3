@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template, session
+from flask import Blueprint, request, jsonify, render_template, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User
 from app import db, redis_client
@@ -19,7 +19,8 @@ def register():
         new_user = User(username=username, email=email, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        return jsonify({"message": "User created successfully"}), 201
+        success_message = "User registered successfully"
+        return render_template('register.html', success_message=success_message)
     return render_template('register.html')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -35,6 +36,12 @@ def login():
             session_token = os.urandom(24).hex()
             redis_client.set(session_token, user.id)
             session['session_token'] = session_token
-            return jsonify({"message": "Login successful", "session_token": session_token}), 200
+            success_message = "Login successful"
+            return render_template('login.html', success_message=success_message)
         return jsonify({"error": "Invalid credentials"}), 401
     return render_template('login.html')
+
+@auth_bp.route('/logout')
+def logout():
+    session.pop('session_token', None)
+    return redirect(url_for('main.home'))
