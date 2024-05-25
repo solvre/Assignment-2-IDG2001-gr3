@@ -15,15 +15,15 @@
             <h1>Ribbit</h1>
             <a href="#">Home</a>
             <div class="dropdown">
-                <button button onclick="dropFunction()" class="dropbtn">r/</button>
+                <button button onclick="dropFunction()" class="dropbtn">Categories/</button>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="#">r/1</a>
                     <a href="#">r/2</a>
                     <a href="#">r/3</a>
                 </div>
             </div>
-            <a href="#">Make Post</a>
-            <a href="#">Profile</a>
+            <a href="{{ url_for('static', filename='makePost.html') }}">Make Post</a>
+            <a href="{{ url_for('static', filename='profile.html') }}">Profile</a>
             </div>
         </nav>
     </header>
@@ -31,9 +31,15 @@
     <main id="content">
         <div class="post">
             <div class="post-design">
-            <h2>My post</h2>
-            <p> I actually dont know wtf to do here this is just testing out design</p>
+            <h2 class="posth2">My post</h2>
+            <p class="postp"> I actually dont know wtf to do here this is just testing out design</p>
+            <button class="star-button">
+                <svg viewBox="0 0 96.56 92.63">
+                    <path class="cls-1" d="m53.97,5.29l9.46,19.17c.92,1.87,2.71,3.17,4.78,3.47l21.16,3.07c5.21.76,7.28,7.15,3.52,10.83l-15.31,14.92c-1.5,1.46-2.18,3.56-1.83,5.62l3.61,21.07c.89,5.18-4.55,9.14-9.21,6.69l-18.92-9.95c-1.85-.97-4.06-.97-5.91,0l-18.92,9.95c-4.66,2.45-10.1-1.51-9.21-6.69l3.61-21.07c.35-2.06-.33-4.16-1.83-5.62l-15.31-14.92c-3.77-3.67-1.69-10.07,3.52-10.83l21.16-3.07c2.07-.3,3.85-1.6,4.78-3.47l9.46-19.17c2.33-4.72,9.05-4.72,11.38,0Z" />
+                </svg>
+            </button>
                 </div>
+                
         </div>
 
     </main>

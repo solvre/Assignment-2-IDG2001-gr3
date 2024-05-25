@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbarContent">
+            <h1>Ribbit</h1>
+            <a href="/Templates/index.html">Home</a>
+            <div class="dropdown">
+                <button button onclick="dropFunction()" class="dropbtn">r/</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#">r/1</a>
+                    <a href="#">r/2</a>
+                    <a href="#">r/3</a>
+                </div>
+            </div>
+            <a href="{{ url_for('static', filename='makePost.html') }}">Make Post</a>
+            <a href="/Static/profile.html">Profile</a>
+            </div>
+        </nav>
+    </header>
+
+    <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
+</body>
+</html>
