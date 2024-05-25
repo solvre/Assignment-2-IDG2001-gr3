@@ -1,29 +1,29 @@
 from flask import Flask, render_template, request, redirect, url_for
-from models import db, User, Post
-from redis import Redis
+from flask_sqlalchemy import SQLAlchemy
+import redis
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@db/reddit_clone'
-db.init_app(app)
-redis = Redis(host='redis', port=6379)
+
+# Configure the SQLAlchemy part of the app instance
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Create the SQLAlchemy db instance
+db = SQLAlchemy(app)
+
+# Initialize Redis
+redis_client = redis.StrictRedis.from_url(os.getenv('REDIS_URL'))
+
+# Define a model (example)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
 
 @app.route('/')
 def index():
-    posts = Post.query.limit(10).all()
-    return render_template('index.html', posts=posts)
-
-@app.route('/posts', methods=['POST'])
-def create_post():
-    data = request.form
-    new_post = Post(user=data['user'], category=data['category'], text=data['text'])
-    db.session.add(new_post)
-    db.session.commit()
-    return redirect(url_for('index'))
-
-@app.route('/like/<int:post_id>', methods=['POST'])
-def like_post(post_id):
-    redis.incr(f'post:{post_id}:likes')
-    return '', 204
+    return "Hello, World!"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5000)

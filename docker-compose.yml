@@ -1,21 +1,36 @@
-version: '3'
+version: '3.8'
+
 services:
   web:
     build: .
     ports:
-      - "80:80"
+      - "5000:5000"
     depends_on:
       - db
       - redis
-  db:
-    image: postgres
     environment:
-      POSTGRES_DB: reddit_clone
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      DATABASE_URL: "mysql://user:password@db/dbname"
+      REDIS_URL: "redis://redis:6379/0"
+
+  db:
+    image: mysql:5.7
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: dbname
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
   redis:
-    image: redis
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
 volumes:
-  postgres-data:
+  db_data:
+  redis_data:
