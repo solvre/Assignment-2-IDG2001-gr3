@@ -5,7 +5,6 @@ from datetime import datetime
 
 posts_bp = Blueprint('posts', __name__)
 
-# Route to render the home page with the latest posts
 @posts_bp.route('/')
 def index():
     category_id = request.args.get('category_id')
@@ -17,7 +16,6 @@ def index():
     categories = Category.query.all()
     return render_template('index.html', posts=posts, categories=categories, selected_category=category_id)
 
-# Route to create a new post
 @posts_bp.route('/create_post', methods=['GET', 'POST'])
 def create_post():
     if 'session_token' not in session or not session['session_token']:
@@ -65,7 +63,6 @@ def create_post():
     categories = Category.query.all()
     return render_template('create_post.html', categories=categories)
 
-# Route to view posts by user
 @posts_bp.route('/user/<int:user_id>')
 def view_user_posts(user_id):
     user = User.query.get(user_id)
@@ -75,7 +72,6 @@ def view_user_posts(user_id):
     posts = Post.query.filter_by(user_id=user_id).order_by(Post.date.desc()).all()
     return render_template('user_posts.html', posts=posts, user=user)
 
-# Route to like a post
 @posts_bp.route('/like_post/<int:post_id>', methods=['POST'])
 def like_post(post_id):
     if 'session_token' not in session or not session['session_token']:
@@ -109,7 +105,6 @@ def like_post(post_id):
     db.session.commit()
     return redirect(url_for('posts.index'))
 
-# Route to dislike a post
 @posts_bp.route('/dislike_post/<int:post_id>', methods=['POST'])
 def dislike_post(post_id):
     if 'session_token' not in session or not session['session_token']:
@@ -143,7 +138,6 @@ def dislike_post(post_id):
     db.session.commit()
     return redirect(url_for('posts.index'))
 
-# Route to delete a post
 @posts_bp.route('/delete_post/<int:post_id>', methods=['POST'])
 def delete_post(post_id):
     if 'session_token' not in session or not session['session_token']:
@@ -166,9 +160,7 @@ def delete_post(post_id):
         flash("Unauthorized access", "error")
         return redirect(url_for('posts.index'))
 
-    # Delete all likes related to the post first
     PostLikes.query.filter_by(post_id=post_id).delete()
-    
     db.session.delete(post)
     db.session.commit()
 
