@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Reddit Clone{% endblock %}
 
-{% block header %}Latest Posts{% endblock %}
+{% block header %}Welcome to Reddit Clone{% endblock %}
 
 {% block content %}
-    <div>
-        <form method="GET" action="{{ url_for('posts.index') }}">
+    <div class="category-filter">
+        <form method="get" action="{{ url_for('posts.index') }}">
             <label for="category">Filter by category:</label>
-            <select id="category" name="category">
-                <option value="">All</option>
-                <option value="cats" {% if selected_category == 'cats' %}selected{% endif %}>Cats</option>
-                <option value="science" {% if selected_category == 'science' %}selected{% endif %}>Science</option>
-                <!-- Add more categories as needed -->
+            <select id="category" name="category_id" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == selected_category %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
             </select>
-            <button type="submit">Filter</button>
         </form>
     </div>
+    <h2>Latest Posts</h2>
     <div id="posts">
         {% for post in posts %}
             <div class="post">
-                <h3>{{ post.category }}</h3>
+                <h3>{{ post.subject }}</h3>
                 <p>{{ post.text }}</p>
-                <p><small>Posted by User ID: {{ post.user_id }} on {{ post.date }}</small></p>
+                <p><small>Posted by <a href="{{ url_for('posts.view_user_posts', user_id=post.user.id) }}">{{ post.user.username }}</a> on {{ post.date }}</small></p>
+                <p>Category: {{ post.category.name }}</p>
                 <p>Likes: {{ post.likes }}</p>
+                <form action="{{ url_for('posts.like_post', post_id=post.id) }}" method="post" style="display:inline;">
+                    <button type="submit">👍 Like</button>
+                </form>
+                <form action="{{ url_for('posts.dislike_post', post_id=post.id) }}" method="post" style="display:inline;">
+                    <button type="submit">👎 Dislike</button>
+                </form>
+                {% if session.session_token and post.user.id == session.get('user_id') %}
+                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">Delete</button>
+                    </form>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

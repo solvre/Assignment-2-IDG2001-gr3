@@ -11,10 +11,14 @@
     <form action="{{ url_for('posts.create_post') }}" method="POST">
         <label for="category">Category:</label>
         <select id="category" name="category" required>
-            <option value="cats">Cats</option>
-            <option value="science">Science</option>
-            <!-- Add more categories as needed -->
-        </select><br>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="new_category">Or create a new category:</label>
+        <input type="text" id="new_category" name="new_category"><br>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required><br>
         <label for="text">Text:</label>
         <textarea id="text" name="text" required></textarea><br>
         <button type="submit">Create Post</button>

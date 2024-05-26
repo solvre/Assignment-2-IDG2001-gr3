@@ -121,3 +121,33 @@ footer {
 .button:hover {
     background-color: #e03d00;
 }
+
+.like-button {
+    background: none;
+    border: none;
+    color: blue;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flashes li {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.flashes .success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.flashes .error {
+    background-color: #f2dede;
+    color: #a94442;
+}

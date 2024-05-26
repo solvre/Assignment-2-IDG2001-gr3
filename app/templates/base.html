@@ -12,8 +12,8 @@
     </header>
     <nav>
         <ul>
-            <li><a href="{{ url_for('posts.index') }}">Home</a></li>
             {% if session.session_token %}
+                <li><a href="{{ url_for('posts.index') }}">Home</a></li>
                 <li><a href="{{ url_for('posts.create_post') }}">Create Post</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
             {% else %}
@@ -23,10 +23,16 @@
         </ul>
     </nav>
     <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>&copy; 2024 Reddit Clone</p>
-    </footer>
 </body>
 </html>
