@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment 2</title>
+    <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <main class="light">
-        <nav>
-            <div class="navbarContent">
-                <h1>Ribbit</h1>
-                <a href="{{ url_for('home') }}">Home</a>
-                <div class="dropdown">
-                    <button onclick="dropFunction()" class="dropbtn">Categories/</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="{{ url_for('category1') }}">c/1</a>
-                        <a href="{{ url_for('category2') }}">c/2</a>
-                        <a href="{{ url_for('category3') }}">c/3</a>
+        <header>
+            <nav>
+                <div class="navbarContent">
+                    <h1>Ribbit</h1>
+                    <a href="{{ url_for('home') }}">Home</a>
+                    <div class="dropdown">
+                        <button onclick="dropFunction()" class="dropbtn">Categories/</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="{{ url_for('category1') }}">c/1</a>
+                            <a href="{{ url_for('category2') }}">c/2</a>
+                            <a href="{{ url_for('category3') }}">c/3</a>
+                        </div>
                     </div>
+                    <a href="{{ url_for('make_post') }}">Make Post</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('login') }}">Logout</a>
                 </div>
-                <a href="{{ url_for('make_post') }}">Make Post</a>
-                <a href="{{ url_for('profile') }}">Profile</a>
-                <a href="{{ url_for('login') }}">Logout</a>
-            </div>
-        </nav>
+            </nav>
+        </header>
+    
         <div class="content">
             <div class="post">
                 <div class="post-design">
@@ -38,8 +41,10 @@
                 </div>
             </div>
         </div>
-    </main>
-    <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
-    <script src="{{ url_for('static', filename='starBg.js') }}"></script>
+    
+        </main>
+    
+        <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
+        <script src="{{ url_for('static', filename='starBg.js') }}"></script>
 </body>
 </html>

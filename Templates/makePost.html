@@ -15,9 +15,9 @@
                 <div class="dropdown">
                     <button onclick="dropFunction()" class="dropbtn">Categories/</button>
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#">r/1</a>
-                        <a href="#">r/2</a>
-                        <a href="#">r/3</a>
+                        <a href="{{ url_for('category1') }}">c/1</a>
+                        <a href="{{ url_for('category2') }}">c/2</a>
+                        <a href="{{ url_for('category3') }}">c/3</a>
                     </div>
                 </div>
                 <a href="{{ url_for('make_post') }}">Make Post</a>

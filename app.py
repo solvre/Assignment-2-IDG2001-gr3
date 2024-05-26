@@ -27,6 +27,18 @@ def make_post():
 def profile():
     return render_template('profile.html')
 
+@app.route('/category1')
+def category1():
+    return render_template('category1.html')
+
+@app.route('/category2')
+def category2():
+    return render_template('category2.html')
+
+@app.route('/category3')
+def category3():
+    return render_template('category3.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
 
