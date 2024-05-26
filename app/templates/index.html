@@ -25,14 +25,14 @@
                 <p><small>Posted by <a href="{{ url_for('posts.view_user_posts', user_id=post.user.id) }}">{{ post.user.username }}</a> on {{ post.date }}</small></p>
                 <p>Category: {{ post.category.name }}</p>
                 <p>Likes: {{ post.likes }}</p>
-                <form action="{{ url_for('posts.like_post', post_id=post.id) }}" method="post" style="display:inline;">
+                <form action="{{ url_for('posts.like_post', post_id=post.id, category_id=selected_category) }}" method="post" style="display:inline;">
                     <button type="submit">👍 Like</button>
                 </form>
-                <form action="{{ url_for('posts.dislike_post', post_id=post.id) }}" method="post" style="display:inline;">
+                <form action="{{ url_for('posts.dislike_post', post_id=post.id, category_id=selected_category) }}" method="post" style="display:inline;">
                     <button type="submit">👎 Dislike</button>
                 </form>
-                {% if session.session_token and post.user.id == session.get('user_id') %}
-                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="post" style="display:inline;">
+                {% if session.session_token and post.user_id == session.get('user_id') %}
+                    <form action="{{ url_for('posts.delete_post', post_id=post.id, category_id=selected_category) }}" method="post" style="display:inline;">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit">Delete</button>
                     </form>

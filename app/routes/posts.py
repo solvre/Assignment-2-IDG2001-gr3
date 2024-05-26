@@ -7,7 +7,7 @@ posts_bp = Blueprint('posts', __name__)
 
 @posts_bp.route('/')
 def index():
-    category_id = request.args.get('category_id')
+    category_id = request.args.get('category_id', type=int)
     if category_id:
         posts = Post.query.filter_by(category_id=category_id).order_by(Post.date.desc()).limit(10).all()
     else:
@@ -15,6 +15,7 @@ def index():
 
     categories = Category.query.all()
     return render_template('index.html', posts=posts, categories=categories, selected_category=category_id)
+
 
 @posts_bp.route('/create_post', methods=['GET', 'POST'])
 def create_post():
@@ -26,42 +27,43 @@ def create_post():
         user_id = redis_client.get(session_token)
 
         if not user_id:
-            flash("Unauthorized access", "error")
-            return redirect(url_for('auth.login'))
+            return jsonify({"error": "Unauthorized"}), 401
 
         data = request.form
-        category_id = data.get('category')
-        new_category = data.get('new_category')
         subject = data.get('subject')
         text = data.get('text')
+        category_id = data.get('category_id')
+        new_category = data.get('new_category')
 
         if not category_id and not new_category:
-            flash("Category is required", "error")
-            return redirect(url_for('posts.create_post'))
-
-        if not text or not subject:
-            flash("Subject and text are required", "error")
-            return redirect(url_for('posts.create_post'))
+            return jsonify({"error": "Category is required"}), 400
 
         if new_category:
-            category = Category.query.filter_by(name=new_category).first()
-            if not category:
+            # Check if the new category already exists
+            existing_category = Category.query.filter_by(name=new_category).first()
+            if existing_category:
+                category_id = existing_category.id
+            else:
+                # Create new category
                 category = Category(name=new_category)
                 db.session.add(category)
                 db.session.commit()
-            category_id = category.id
-        else:
-            category_id = int(category_id)
+                category_id = category.id
+
+        if not text or not subject:
+            return jsonify({"error": "Missing data"}), 400
 
         new_post = Post(user_id=int(user_id), category_id=category_id, subject=subject, text=text, date=datetime.utcnow())
         db.session.add(new_post)
         db.session.commit()
 
-        flash("Post created successfully", "success")
-        return redirect(url_for('posts.index'))
+        success_message = "Post created successfully"
+        categories = Category.query.all()
+        return render_template('create_post.html', success_message=success_message, categories=categories)
 
     categories = Category.query.all()
     return render_template('create_post.html', categories=categories)
+
 
 @posts_bp.route('/user/<int:user_id>')
 def view_user_posts(user_id):

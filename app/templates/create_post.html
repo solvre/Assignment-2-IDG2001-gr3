@@ -9,18 +9,18 @@
         <p class="success">{{ success_message }}</p>
     {% endif %}
     <form action="{{ url_for('posts.create_post') }}" method="POST">
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
-        <label for="new_category">Or create a new category:</label>
-        <input type="text" id="new_category" name="new_category"><br>
         <label for="subject">Subject:</label>
         <input type="text" id="subject" name="subject" required><br>
         <label for="text">Text:</label>
         <textarea id="text" name="text" required></textarea><br>
+        <label for="category">Category:</label>
+        <select id="category" name="category_id">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="new_category">Or Create New Category:</label>
+        <input type="text" id="new_category" name="new_category"><br>
         <button type="submit">Create Post</button>
     </form>
 {% endblock %}
