@@ -64,15 +64,15 @@ def create_post():
     categories = Category.query.all()
     return render_template('create_post.html', categories=categories)
 
-
-@posts_bp.route('/user/<int:user_id>')
+@posts_bp.route('/user_posts/<int:user_id>', methods=['GET'])
 def view_user_posts(user_id):
     user = User.query.get(user_id)
     if not user:
-        flash("User not found", "error")
-        return redirect(url_for('posts.index'))
+        return jsonify({"error": "User not found"}), 404
+    
     posts = Post.query.filter_by(user_id=user_id).order_by(Post.date.desc()).all()
-    return render_template('user_posts.html', posts=posts, user=user)
+    return render_template('user_posts.html', user=user, posts=posts)
+
 
 @posts_bp.route('/like_post/<int:post_id>', methods=['POST'])
 def like_post(post_id):
