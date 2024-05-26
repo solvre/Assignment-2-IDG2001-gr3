@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
+    <main class="light">
         <nav>
             <div class="navbarContent">
                 <h1>Ribbit</h1>
@@ -22,20 +22,20 @@
                 </div>
                 <a href="{{ url_for('make_post') }}">Make Post</a>
                 <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('login') }}">Logout</a>
             </div>
         </nav>
-    </header>
-
-    <main>
-        <div class="profileBox">
-            <div class="profileDesign">
-                <h2 class="profileh2">Placeholder text</h2>
-                <h3 class="profileh3">Placeholder text</h3>
-                <h3 class="profileh3">Placeholder text</h3>
+        <div class="content">
+            <div class="profileBox">
+                <div class="profileDesign">
+                    <h2 class="profileh2">Placeholder text</h2>
+                    <h3 class="profileh3">Placeholder text</h3>
+                    <h3 class="profileh3">Placeholder text</h3>
+                </div>
             </div>
         </div>
     </main>
-
     <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
+    <script src="{{ url_for('static', filename='starBg.js') }}"></script>
 </body>
 </html>

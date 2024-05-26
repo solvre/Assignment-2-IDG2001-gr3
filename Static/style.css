@@ -6,6 +6,7 @@ body{
 main{
     display: grid;
     grid-template-columns: 1fr 5fr;
+    z-index: 2;
 }
 h1, h2, h3, h4, p {
     color: aliceblue;
@@ -19,7 +20,7 @@ nav {
     font-family:'Courier New', Courier, monospace;
     width: 200px;
     height: 100vh;
-    position: fixed;
+    z-index: 1;
     border-radius: 10px 10px 0% 0%;
     box-shadow: 0px 0px 3px 3px #d9af56;
 }
@@ -46,7 +47,9 @@ a, .dropdown {
     display: block;
     padding: 10px;
 }
-
+.content{
+    margin-top:2%;
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -100,21 +103,21 @@ a, .dropdown {
 
 /* post/profile box design stuff */
 .post, .profileBox {
-    display: grid;
-    justify-content: center;
-    align-items: center;
+    width:40%;
+    margin-left: 20%;
 }
 .post-design, .profileDesign {
     place-items: center;
     background-color: #0c2a42;
-    width: 600px;
-    height: 300px;
+    width: 100%;
+    height: auto;
+    padding: 5%;
     box-shadow: 0px 0px 3px 3px #d9af56;
     border-radius: 10px;
 }
 
 .posth2, .postp {
-    margin-left: 50px;
+    margin-left: 5%;
 }
 
 .profileh2, .profileh3, .posth1 {
@@ -185,35 +188,44 @@ input[type=submit]{
     font-size: 15px;
     font-weight: bold;
 }
-@keyframes blink {
-    0%, 70%, 100% {
-        opacity: 1;
-    }
-    80%, 90% {
-        opacity: 0;
-    }
-}
 
-.stars {
-    position: absolute;
-    width: 100%;
+.light {
     height: 100%;
-    top: 0;
-    left: 0;
-    background: transparent;
-    overflow: hidden;
-    z-index: 0;
+    width: 100%;
 }
-
-.stars::after {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    box-shadow: 1px 1px white, 2px 2px white, 3px 3px white, 4px 4px white, 
-                5px 5px white, 6px 6px white, 7px 7px white, 8px 8px white, 
-                9px 9px white, 10px 10px white, 11px 11px white, 12px 12px white,
-                13px 13px white, 14px 14px white, 15px 15px white;
-    animation: blink 3s infinite alternate;
-}
+  
+  .star1 {
+    animation: 3s linear 1s infinite alternate twinkle;
+  }
+  
+  .star2 {
+    animation: 4s linear 0s infinite alternate twinkle;
+  }
+  
+  .star3 {
+    animation: 3.5s linear 0.5s infinite alternate twinkle;
+  }
+  
+  .star4 {
+    animation: 1.25s linear 1.5s infinite alternate twinkle;
+  }
+  
+  .star5 {
+    animation: 4s linear 2s infinite alternate twinkle;
+  }
+  
+  .star6 {
+    animation: 2.5s linear 1s infinite alternate twinkle;
+  }
+  
+  @keyframes twinkle {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
+    <main class="light">
         <nav>
             <div class="navbarContent">
                 <h1>Ribbit</h1>
-                <a href="{{ url_for('home') }}">Home</a>
                 <a href="{{ url_for('login') }}">Log In</a>
                 <a href="{{ url_for('signup') }}">Sign Up</a>
             </div>
         </nav>
-    </header>
-    <main id="content">
-        <h1>Log In</h1>
-        <div class="form-login">
-            <form method="post">
-                <label for="username">Username:</label>
-                <input type="text" name="username" required/>
-                <label for="password">Password:</label>
-                <input type="password" name="password" required/>
-                <input type="submit" value="Log In"/>
-            </form>
+        <div class="content">
+            <div class="form-login">
+                <h2>Log In</h2>
+                <form method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" required/>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" required/>
+                    <input type="submit" value="Log In"/>
+                </form>
+            </div>
         </div>
     </main>
     <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
+    <script src="{{ url_for('static', filename='starBg.js') }}"></script>
 </body>
 </html>

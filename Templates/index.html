@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment 2</title>
-    <link rel="stylesheet" href="../Static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="stars"></div>
-    <main>
+    <main class="light">
         <nav>
             <div class="navbarContent">
                 <h1>Ribbit</h1>
@@ -23,9 +22,10 @@
                 </div>
                 <a href="{{ url_for('make_post') }}">Make Post</a>
                 <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('login') }}">Logout</a>
             </div>
         </nav>
-        <div id="content">
+        <div class="content">
             <div class="post">
                 <div class="post-design">
                     <h2 class="posth2">My post</h2>
@@ -40,5 +40,6 @@
         </div>
     </main>
     <script src="{{ url_for('static', filename='dropdownScript.js') }}"></script>
+    <script src="{{ url_for('static', filename='starBg.js') }}"></script>
 </body>
 </html>
