@@ -1,7 +1,7 @@
 body{
     width: 100%;
     height: 100vh;
-    background: linear-gradient(145deg, #89b0d1, #19426e, #0c2a42, #0b1c36);
+    background: linear-gradient(145deg, #84a4d5, #19426e, #0c2a42, #0b1c36);
 }
 
 h1, h2, h3, h4, p {
@@ -94,6 +94,13 @@ a, .dropdown {
     display:block;
 }
 
+/*Log in / welcome page */
+
+.logInBox{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
 
 /* post/profile box design stuff */
 .post, .profileBox {
@@ -155,7 +162,7 @@ label{
     font-size: 15px;
 }
 
-input[type=text], input[type=email] {
+input[type=text], input[type=email], input[type=password] {
     display: grid;
     margin-left: auto;
     margin-right: auto;
@@ -167,6 +174,7 @@ input[type=text], input[type=email] {
     background-color: #0c2a42;
     box-shadow: 0px 0px 3px 3px #d9af56;
     border-radius: 10px;
+    color: aliceblue;
 }
 
 input[name=field2] {
