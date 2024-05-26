@@ -13,7 +13,7 @@
             <h1>Ribbit</h1>
             <a href="#">Home</a>
             <div class="dropdown">
-                <button button onclick="dropFunction()" class="dropbtn">r/</button>
+                <button button onclick="dropFunction()" class="dropbtn">Categories/</button>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="#">r/1</a>
                     <a href="#">r/2</a>
@@ -27,12 +27,17 @@
     </header>
 
     <main id="content">
-        <div class="post">
-            <div class="post-design">
-            <h2>My post</h2>
-            <p> I actually dont know wtf to do here this is just testing out design</p>
-                </div>
+        <h1 class="posth1">Make a Post!</h1>
+        <div class="form-createPost">
+            <form id="creatPost" method="post">
+                <label for="field1">Title:</label>
+                    <input type="text" name="field1" required/>
+                <label for="field2">Text:</label>
+                    <input type="text" name="field2" maxlength="250" required/>
+                    <input type="submit" name="submit" value="Post to:"/>
+            </form>
         </div>
+
 
     </main>
 

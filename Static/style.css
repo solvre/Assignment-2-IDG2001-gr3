@@ -95,13 +95,13 @@ a, .dropdown {
 }
 
 
-/* post design stuff */
-.post {
+/* post/profile box design stuff */
+.post, .profileBox {
     display: grid;
     justify-content: center;
     align-items: center;
 }
-.post-design {
+.post-design, .profileDesign {
     place-items: center;
     background-color: #0c2a42;
     width: 600px;
@@ -112,6 +112,10 @@ a, .dropdown {
 
 .posth2, .postp {
     margin-left: 50px;
+}
+
+.profileh2, .profileh3, .posth1 {
+    text-align: center;
 }
 
 .posth2 {
@@ -135,4 +139,46 @@ a, .dropdown {
 
 .star-button:hover svg {
     fill: orange;
+}
+
+/* post stuff */
+.form-createPost{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+label{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    color: whitesmoke;
+    font-size: 15px;
+}
+
+input[type=text], input[type=email] {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #0c2a42;
+    box-shadow: 0px 0px 3px 3px #d9af56;
+    border-radius: 10px;
+}
+
+input[name=field2] {
+    height: 100px;
+}
+
+input[type=submit]{
+    height: 30px;
+    width: 90px;
+    border-radius: 12px;
+    background-color: #d9af56;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: bold;
 }
