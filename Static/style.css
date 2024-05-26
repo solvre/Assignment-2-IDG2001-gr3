@@ -1,9 +1,12 @@
 body{
     width: 100%;
     height: 100vh;
-    background: linear-gradient(145deg, #89b0d1, #19426e, #0c2a42, #0b1c36);
+    background: linear-gradient(to bottom, #000314, #00093D,  #0054A3);
 }
-
+main{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
 h1, h2, h3, h4, p {
     color: aliceblue;
     font-family:'Courier New', Courier, monospace;
@@ -181,4 +184,36 @@ input[type=submit]{
     font-family: 'Courier New', Courier, monospace;
     font-size: 15px;
     font-weight: bold;
+}
+@keyframes blink {
+    0%, 70%, 100% {
+        opacity: 1;
+    }
+    80%, 90% {
+        opacity: 0;
+    }
+}
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.stars::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 1px 1px white, 2px 2px white, 3px 3px white, 4px 4px white, 
+                5px 5px white, 6px 6px white, 7px 7px white, 8px 8px white, 
+                9px 9px white, 10px 10px white, 11px 11px white, 12px 12px white,
+                13px 13px white, 14px 14px white, 15px 15px white;
+    animation: blink 3s infinite alternate;
 }
